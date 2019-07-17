@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("eaddress_sdk_csharp")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("SDK for connect with RENIEC Digital Address")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("eaddress_sdk_csharp")]
+[assembly: AssemblyCompany("RENIEC")]
+[assembly: AssemblyProduct("RENIEC eAddress SDK")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
