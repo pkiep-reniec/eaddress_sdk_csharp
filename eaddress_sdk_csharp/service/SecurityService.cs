@@ -72,6 +72,10 @@ namespace eaddress_sdk_csharp.service
 
                     return tokenResponse.accessToken;
                 }
+                else
+                {
+                    Debug.WriteLine(response.RequestMessage.ToString());
+                }
             }
             catch (Exception ex)
             {

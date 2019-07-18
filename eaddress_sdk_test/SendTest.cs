@@ -32,9 +32,9 @@ namespace eaddress_sdk_test
             //oMessage.rep = "46256479,70273865";
 
             oMessage.docType = Constants.TYPE_DOC_DNI;
-            oMessage.doc = "70273865";
+            oMessage.doc = "46256479";
 
-            oMessage.subject = "mensaje de prueba individual 222";
+            oMessage.subject = "mensaje de prueba individual 777";
             oMessage.message = "<p>Hola <b>Mundo</b></p>";
             oMessage.tag = "tag";
 
@@ -65,13 +65,13 @@ namespace eaddress_sdk_test
 
             Console.WriteLine(result.Result.success);
 
-            //Assert.AreEqual(true, result.Result.success);
+            Assert.AreEqual(true, result.Result.success);
         }
 
         public void Before()
         {
             ConfigAga oConfigAga = new ConfigAga();
-            oConfigAga.agaUri = "";
+            oConfigAga.agaUri = "http://localhost:8080/aga";
             oConfigAga.timestamp = "";
             oConfigAga.certificateId = "";
             oConfigAga.secretPassword = "";

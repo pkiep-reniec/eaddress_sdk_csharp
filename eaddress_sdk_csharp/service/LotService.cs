@@ -67,6 +67,10 @@ namespace eaddress_sdk_csharp.service
 
                         return paginatorLot;
                     }
+                    else
+                    {
+                        Debug.WriteLine(response.RequestMessage.ToString());
+                    }
                 }
 
             }
@@ -108,6 +112,10 @@ namespace eaddress_sdk_csharp.service
 
                         return paginatorLotNotifications;
                     }
+                    else
+                    {
+                        Debug.WriteLine(response.RequestMessage.ToString());
+                    }
                 }
             } catch (Exception ex) {
                 Debug.WriteLine(ex.Message);
@@ -137,6 +145,10 @@ namespace eaddress_sdk_csharp.service
                         byte[] content = response.Content.ReadAsByteArrayAsync().Result;
 
                         return content;
+                    }
+                    else
+                    {
+                        Debug.WriteLine(response.RequestMessage.ToString());
                     }
                 }
             }

@@ -75,7 +75,7 @@ namespace eaddress_sdk_csharp.common
             try
             {
                 //zip files
-                SevenZipCompressor.SetLibraryPath(Path.GetFullPath("7z.dll"));
+                //SevenZipCompressor.SetLibraryPath(Path.GetFullPath("7z.dll"));
                 SevenZipCompressor szc = new SevenZipCompressor();
                 szc.CompressionLevel = CompressionLevel.Ultra;
                 szc.CompressionMode = CompressionMode.Create;

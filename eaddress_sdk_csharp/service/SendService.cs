@@ -43,6 +43,7 @@ namespace eaddress_sdk_csharp.service
         public async Task<ApiResponse> ProcSingleNotification(Message oMessage)
         {
             ApiResponse result = null;
+
             try
             {
                 string pathDir = utils.CreateTempDir();
@@ -88,6 +89,8 @@ namespace eaddress_sdk_csharp.service
 
         public async Task<ApiResponse> ProcMassiveNotification(Message oMessage, FileStream file)
         {
+            ApiResponse result = null;
+
             if (this.configAga == null)
             {
                 return null;
@@ -116,7 +119,7 @@ namespace eaddress_sdk_csharp.service
                         string json = JsonConvert.SerializeObject(metadata);
                         oMessage.metadata = json;
 
-                        ApiResponse result = await SendMassive(fileSign, file, oMessage, token);
+                        result = await SendMassive(fileSign, file, oMessage, token);
 
                         if (result != null)
                         {
@@ -133,7 +136,7 @@ namespace eaddress_sdk_csharp.service
                 Debug.WriteLine(ex.StackTrace);
             }
 
-            return null;
+            return result;
         }
 
         private Metadata createMetadata(Message message, FileStream fileCsv, Boolean single)
@@ -196,38 +199,45 @@ namespace eaddress_sdk_csharp.service
 
         private Metadata getChecksum(FileStream fileCsv)
         {
-            String line = "";
-            String content = "";
-            int count = -1;
-
-            //string[] read;
-            char[] seperators = { ',' };
-
-            StreamReader sr = new StreamReader(fileCsv);
-
-            string data = sr.ReadLine();
-
-            while ((data = sr.ReadLine()) != null)
-            {
-                content += data.Trim();
-                //read = data.Split(seperators, StringSplitOptions.None);
-                if (data != "")
-                {
-                    count++;
-                }
-            }
-
             Metadata metadata = new Metadata();
-            var crypt = new System.Security.Cryptography.SHA256Managed();
-            var hash = new System.Text.StringBuilder();
-            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(content));
-            foreach (byte theByte in crypto)
-            {
-                hash.Append(theByte.ToString("x2"));
-            }
 
-            metadata.checksum = hash.ToString();
-            metadata.quantity = count;
+            try
+            {
+                String data = "";
+                String content = "";
+                int count = -1;
+
+                StreamReader sr = new StreamReader(fileCsv);
+
+                while ((data = sr.ReadLine()) != null)
+                {
+                    content += data.Trim();
+
+                    if (data != "")
+                    {
+                        count++;
+                    }
+                }
+
+                metadata = new Metadata();
+                var crypt = new System.Security.Cryptography.SHA256Managed();
+                var hash = new StringBuilder();
+                byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(content));
+                foreach (byte theByte in crypto)
+                {
+                    hash.Append(theByte.ToString("x2"));
+                }
+
+                metadata.checksum = hash.ToString();
+                metadata.quantity = count;
+
+                return metadata;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
 
             return metadata;
         }
@@ -264,6 +274,10 @@ namespace eaddress_sdk_csharp.service
                             }
 
                             return output;
+                        }
+                        else
+                        {
+                            Debug.WriteLine(response.RequestMessage.ToString());
                         }
                     }
                 }
@@ -303,10 +317,18 @@ namespace eaddress_sdk_csharp.service
 
                     HttpResponseMessage response = await httpClient.PostAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/send/single"), form);
 
-                    String content = await response.Content.ReadAsStringAsync();
-                    ApiResponse tokenResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        httpClient.Dispose();
+                        String content = await response.Content.ReadAsStringAsync();
+                        ApiResponse tokenResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
 
-                    return tokenResponse;
+                        return tokenResponse;
+                    }
+                    else
+                    {
+                        Debug.WriteLine(response.RequestMessage.ToString());
+                    }
                 }
             }
             catch (Exception ex)
@@ -323,6 +345,7 @@ namespace eaddress_sdk_csharp.service
             try
             {
                 ServicePointManager.Expect100Continue = false;
+                fileCSV.Close();
 
                 HttpClient httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AUTHORIZATION_BEARER, accessToken);
@@ -334,17 +357,26 @@ namespace eaddress_sdk_csharp.service
                 {
                     form.Add(new StringContent(oMessage.subject), "subject");
                     form.Add(new StringContent(oMessage.message), "message");
-                    form.Add(new StringContent(oMessage.tag), "tag");
-                    form.Add(new StringContent(oMessage.callback), "callback");
+                    form.Add(new StringContent(oMessage.tag == null ? "" : oMessage.tag), "tag");
+                    form.Add(new StringContent(oMessage.callback == null ? "" : oMessage.callback), "callback");
                     form.Add(new StringContent(oMessage.metadata), "metadata");
                     form.Add(new StreamContent(fileDataCSV), "fileCSV", fileDataCSV.Name);
                     form.Add(new StreamContent(fileDataSign), "fileSign", fileDataSign.Name);
 
                     HttpResponseMessage response = await httpClient.PostAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/send/massive"), form);
 
-                    String content = await response.Content.ReadAsStringAsync();
-                    ApiResponse tokenResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
-                    return tokenResponse;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        httpClient.Dispose();
+                        String content = await response.Content.ReadAsStringAsync();
+                        ApiResponse tokenResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
+
+                        return tokenResponse;
+                    }
+                    else
+                    {
+                        Debug.WriteLine(response.RequestMessage.ToString());
+                    }
                 }
             }
             catch (Exception ex)
