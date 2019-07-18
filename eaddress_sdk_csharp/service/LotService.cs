@@ -93,7 +93,7 @@ namespace eaddress_sdk_csharp.service
 
                 if (token != null)
                 {
-                    UriBuilder uriBuilder = utils.ConvertToUriBuilder(searchRequest, string.Concat(this.config.eaddressServiceUri, "/api/v1.0/lot", lotId));
+                    UriBuilder uriBuilder = utils.ConvertToUriBuilder(searchRequest, string.Concat(this.config.eaddressServiceUri, "/api/v1.0/lot/", lotId));
 
                     if (uriBuilder == null)
                     {
