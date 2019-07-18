@@ -83,6 +83,7 @@
     <Folder Include="utils\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="eaddress_sdk_csharp.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
