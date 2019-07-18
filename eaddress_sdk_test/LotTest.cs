@@ -64,6 +64,7 @@ namespace eaddress_sdk_test
             try
             {
                 Task<byte[]> metadata = reniecEAddressClient.DownloadMetadata(lotId);
+                metadata.Wait();
 
                 if (metadata != null)
                 {
@@ -88,7 +89,7 @@ namespace eaddress_sdk_test
             string configFile = @"..\..\resources\config.json";
             reniecEAddressClient = new ReniecEAddressClient(configFile);
 
-            this.lotId = "";
+            this.lotId = "5d307f3dc89b4704ba64a109";
         }
     }
 }

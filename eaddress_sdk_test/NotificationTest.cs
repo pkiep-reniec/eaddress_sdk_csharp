@@ -63,6 +63,7 @@ namespace eaddress_sdk_test
             try
             {
                 Task<byte[]> acuse = reniecEAddressClient.DownloadAcuse(notificationId, lotId, Constants.RECEIVED);
+                acuse.Wait();
 
                 if (acuse != null)
                 {
@@ -87,8 +88,8 @@ namespace eaddress_sdk_test
             string configFile = @"..\..\resources\config.json";
             reniecEAddressClient = new ReniecEAddressClient(configFile);
 
-            this.notificationId = "5d2e530bc89b4707adbdd06c";
-            this.lotId = "5d2e5307c89b4704ba64a0fd";
+            this.notificationId = "5d2fc91bc89b470760bd3787";
+            this.lotId = "5d2fc918c89b4704ba64a107";
         }
     }
 }
