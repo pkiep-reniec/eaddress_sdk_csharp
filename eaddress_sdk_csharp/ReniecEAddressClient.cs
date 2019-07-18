@@ -27,6 +27,11 @@ namespace eaddress_sdk_csharp
             this.setConfig(configFile, null, null);
         }
 
+        public async Task<ApiResponse> SendSingleNotification(Message oMessage)
+        {
+            return await this.SendSingleNotification(oMessage, null);
+        }
+
         public async Task<ApiResponse> SendSingleNotification(Message oMessage, List<Attachment> attachments)
         {
             if (this.configAga == null)
@@ -36,8 +41,11 @@ namespace eaddress_sdk_csharp
 
             try
             {
-                string jsonAttachments = JsonConvert.SerializeObject(attachments);
-                oMessage.attachments = jsonAttachments;
+                if (attachments != null)
+                {
+                    string jsonAttachments = JsonConvert.SerializeObject(attachments);
+                    oMessage.attachments = jsonAttachments;
+                }
             }
             catch (Exception e)
             {
