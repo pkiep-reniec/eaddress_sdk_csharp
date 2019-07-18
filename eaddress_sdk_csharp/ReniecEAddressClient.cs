@@ -17,14 +17,14 @@ namespace eaddress_sdk_csharp
         private LotService lotService;
         private NotificationService notificationService;
 
-        public ReniecEAddressClient(string configFile, ConfigAga oConfigAga)
+        public ReniecEAddressClient(string configFile, ConfigAga oConfigAga, String path7Zdll)
         {
-            this.setConfig(configFile, oConfigAga);
+            this.setConfig(configFile, oConfigAga, path7Zdll);
         }
 
         public ReniecEAddressClient(string configFile)
         {
-            this.setConfig(configFile, null);
+            this.setConfig(configFile, null, null);
         }
 
         public async Task<ApiResponse> SendSingleNotification(Message oMessage, List<Attachment> attachments)
@@ -85,10 +85,10 @@ namespace eaddress_sdk_csharp
 
         public Task<byte[]> DownloadAcuse(string id, string lotId, string acuse)
         {
-            return this.notificationService.DownloadAcuse(id,lotId, acuse);
+            return this.notificationService.DownloadAcuse(id, lotId, acuse);
         }
 
-        private void setConfig(string configFile, ConfigAga oConfigAga)
+        private void setConfig(string configFile, ConfigAga oConfigAga, String path7Zdll)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace eaddress_sdk_csharp
                 }
 
                 this.configAga = oConfigAga;
-                this.sendService = SendService.getInstance(this.config, this.configAga);
+                this.sendService = SendService.getInstance(this.config, this.configAga, path7Zdll);
                 this.lotService = LotService.getInstance(this.config);
                 this.notificationService = NotificationService.getInstance(this.config);
 

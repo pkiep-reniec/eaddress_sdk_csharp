@@ -34,7 +34,7 @@ namespace eaddress_sdk_test
             oMessage.docType = Constants.TYPE_DOC_DNI;
             oMessage.doc = "46256479";
 
-            oMessage.subject = "mensaje de prueba individual 777";
+            oMessage.subject = "mensaje de prueba individual 888";
             oMessage.message = "<p>Hola <b>Mundo</b></p>";
             oMessage.tag = "tag";
 
@@ -42,7 +42,7 @@ namespace eaddress_sdk_test
             result.Wait();
 
             Console.WriteLine(JsonConvert.SerializeObject(result.Result));
-            
+
             Assert.AreEqual(true, result.Result.success);
         }
 
@@ -54,7 +54,7 @@ namespace eaddress_sdk_test
             FileStream fileCSV = new FileStream(@"..\..\resources\massive.csv", FileMode.Open, FileAccess.Read);
 
             Message oMessage = new Message();
-            oMessage.subject = "22 mensaje de prueba masiva para [[nombres]]";
+            oMessage.subject = "88 mensaje de prueba masiva para [[nombres]]";
             oMessage.message = "<p></p>" +
                                "<p>[[nombres]]</p>" +
                                "<p>[[numero_orden]]</p>";
@@ -71,12 +71,14 @@ namespace eaddress_sdk_test
         public void Before()
         {
             ConfigAga oConfigAga = new ConfigAga();
-            oConfigAga.agaUri = "http://localhost:8080/aga";
-            oConfigAga.timestamp = "";
-            oConfigAga.certificateId = "";
-            oConfigAga.secretPassword = "";
+            oConfigAga.agaUri = "http://172.24.4.230:8080/refirma-aga/rest/service/sign-file";
+            oConfigAga.timestamp = "true";
+            oConfigAga.certificateId = "certdm";
+            oConfigAga.secretPassword = "NH7PERU$$$";
 
-            reniecEAddressClient = new ReniecEAddressClient(@"..\..\resources\config.json", oConfigAga);
+            string path7Z = @"D:\temp\library";
+
+            reniecEAddressClient = new ReniecEAddressClient(@"..\..\resources\config.json", oConfigAga, path7Z);
         }
     }
 }

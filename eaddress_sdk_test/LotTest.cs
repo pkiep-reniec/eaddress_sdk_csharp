@@ -1,11 +1,11 @@
 ﻿using eaddress_sdk_csharp;
 using eaddress_sdk_csharp.dto;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace eaddress_sdk_test
 {

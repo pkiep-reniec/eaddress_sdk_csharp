@@ -21,20 +21,22 @@ namespace eaddress_sdk_csharp.service
         private ConfigAga configAga;
         private SecurityService securityService;
         private Utils utils;
+        private String path7Zdll;
 
-        private SendService(Config config, ConfigAga configAga)
+        private SendService(Config config, ConfigAga configAga, String path7Zdll)
         {
             this.config = config;
             this.configAga = configAga;
             this.securityService = SecurityService.getInstance(config);
             this.utils = Utils.getInstance;
+            this.path7Zdll = path7Zdll;
         }
 
-        public static SendService getInstance(Config config, ConfigAga configAga)
+        public static SendService getInstance(Config config, ConfigAga configAga, String path7Zdll)
         {
             if (__instance == null)
             {
-                __instance = new SendService(config, configAga);
+                __instance = new SendService(config, configAga, path7Zdll);
             }
 
             return __instance;
@@ -250,7 +252,7 @@ namespace eaddress_sdk_csharp.service
             {
                 ServicePointManager.Expect100Continue = false;
 
-                string pathFileZip = utils.CreateZip(metadata, this.configAga, pathDir);
+                string pathFileZip = utils.CreateZip(metadata, this.configAga, pathDir, path7Zdll);
 
                 FileStream fileZip = new FileStream(pathFileZip, FileMode.Open, FileAccess.Read);
 
