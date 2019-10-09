@@ -44,10 +44,10 @@ namespace eaddress_sdk_test
             searchRequest.page = 1;
             searchRequest.count = 20;
 
-            Task<PaginatorLotNotifications> paginatorLotNotifications = reniecEAddressClient.FetchLotNotifications(lotId, searchRequest);
+            Task<ApiPaginatorLotNotifications> paginatorLotNotifications = reniecEAddressClient.FetchLotNotifications(lotId, searchRequest);
             paginatorLotNotifications.Wait();
 
-            foreach (NotificationResponse notificationResponse in paginatorLotNotifications.Result.notifications)
+            foreach (NotificationsResponse notificationResponse in paginatorLotNotifications.Result.notifications)
             {
                 Console.WriteLine(JsonConvert.SerializeObject(notificationResponse));
             }
@@ -89,7 +89,7 @@ namespace eaddress_sdk_test
             string configFile = @"..\..\resources\config.json";
             reniecEAddressClient = new ReniecEAddressClient(configFile);
 
-            this.lotId = "5d307f3dc89b4704ba64a109";
+            this.lotId = "5d8d2a36c89b4711655603e5";
         }
     }
 }

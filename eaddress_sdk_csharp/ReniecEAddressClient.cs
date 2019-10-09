@@ -71,17 +71,17 @@ namespace eaddress_sdk_csharp
             return this.lotService.FetchAll(searchRequest);
         }
 
-        public Task<PaginatorLotNotifications> FetchLotNotifications(string lotId, SearchRequest searchRequest)
+        public Task<ApiPaginatorLotNotifications> FetchLotNotifications(string lotId, SearchRequest searchRequest)
         {
             return this.lotService.FetchNotifications(lotId, searchRequest);
         }
 
-        public Task<PaginatorLotNotifications> FetchAllNotifications(SearchRequest searchRequest)
+        public Task<ApiPaginatorLotNotifications> FetchAllNotifications(SearchRequest searchRequest)
         {
             return this.notificationService.FetchAll(searchRequest);
         }
 
-        public Task<NotificationResponse> GetNotification(String notificationId, String lotId)
+        public Task<NotificationsResponse> GetNotification(String notificationId, String lotId)
         {
             return this.notificationService.GetOne(notificationId, lotId);
         }

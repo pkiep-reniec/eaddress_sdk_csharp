@@ -11,10 +11,10 @@ namespace eaddress_sdk_csharp.dto
         public string name { get; set; }
         public string doc { get; set; }
         public string subject { get; set; }
-        public int status { get; set; }
+        public int? status { get; set; }
         public long dateBegin { get; set; }
         public long dateEnd { get; set; }
-        public bool failed { get; set; }
+        public bool? failed { get; set; }
 
         public SearchRequest()
         {

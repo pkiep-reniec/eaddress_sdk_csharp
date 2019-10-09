@@ -56,13 +56,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="common\Acuse.cs" />
+    <Compile Include="common\Messages.cs" />
     <Compile Include="common\Constants.cs" />
     <Compile Include="common\Utils.cs" />
+    <Compile Include="dto\ApiNotificationResponse.cs" />
     <Compile Include="dto\SearchRequest.cs" />
-    <Compile Include="dto\PaginatorLotNotifications.cs" />
+    <Compile Include="dto\ApiPaginatorLotNotifications.cs" />
     <Compile Include="dto\PaginatorLot.cs" />
     <Compile Include="dto\ApiResponse.cs" />
-    <Compile Include="dto\NotificationResponse.cs" />
+    <Compile Include="dto\NotificationsResponse.cs" />
     <Compile Include="dto\LotData.cs" />
     <Compile Include="dto\Attachment.cs" />
     <Compile Include="dto\Config.cs" />

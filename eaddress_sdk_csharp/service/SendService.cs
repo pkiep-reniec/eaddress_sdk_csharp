@@ -71,7 +71,7 @@ namespace eaddress_sdk_csharp.service
 
                         result = await SendSingle(fileSign, oMessage, token);
 
-                        if (result.success)
+                        if (result != null)
                         {
                             Directory.Delete(pathDir, true);
 
@@ -86,7 +86,7 @@ namespace eaddress_sdk_csharp.service
                 Debug.WriteLine(ex.StackTrace);
             }
 
-            return result;
+            return new ApiResponse(Messages.UNEXPECTED_ERROR);
         }
 
         public async Task<ApiResponse> ProcMassiveNotification(Message oMessage, FileStream file)
@@ -318,19 +318,12 @@ namespace eaddress_sdk_csharp.service
                     form.Add(new StreamContent(fileSign), "fileSign", fileSign.Name);
 
                     HttpResponseMessage response = await httpClient.PostAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/send/single"), form);
+                    
+                    httpClient.Dispose();
+                    String content = await response.Content.ReadAsStringAsync();
+                    ApiResponse tokenResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        httpClient.Dispose();
-                        String content = await response.Content.ReadAsStringAsync();
-                        ApiResponse tokenResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
-
-                        return tokenResponse;
-                    }
-                    else
-                    {
-                        Debug.WriteLine(response.RequestMessage.ToString());
-                    }
+                    return tokenResponse;
                 }
             }
             catch (Exception ex)

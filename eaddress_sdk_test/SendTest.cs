@@ -32,9 +32,9 @@ namespace eaddress_sdk_test
             //oMessage.rep = "46256479,70273865";
 
             oMessage.docType = Constants.TYPE_DOC_DNI;
-            oMessage.doc = "70273865";
+            oMessage.doc = "11111111";
 
-            oMessage.subject = "mensaje de prueba individual csharp";
+            oMessage.subject = "mensaje de prueba individual csharp disolver";
             oMessage.message = "<p>Hola <b>Mundo</b></p>";
             oMessage.tag = "tag";
 
@@ -71,10 +71,10 @@ namespace eaddress_sdk_test
         public void Before()
         {
             ConfigAga oConfigAga = new ConfigAga();
-            oConfigAga.agaUri = "http://localhost:8080/aga";
-            oConfigAga.timestamp = "";
-            oConfigAga.certificateId = "";
-            oConfigAga.secretPassword = "";
+            oConfigAga.agaUri = "http://172.24.4.230:8080/refirma-aga/rest/service/sign-file";
+            oConfigAga.timestamp = "true";
+            oConfigAga.certificateId = "certdm";
+            oConfigAga.secretPassword = "NH7PERU$$$";
 
             string path7Z = @"D:\temp\library";
 

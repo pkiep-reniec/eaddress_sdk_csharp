@@ -35,7 +35,7 @@ namespace eaddress_sdk_csharp.service
             return __instance;
         }
 
-        public async Task<PaginatorLotNotifications> FetchAll(SearchRequest searchRequest)
+        public async Task<ApiPaginatorLotNotifications> FetchAll(SearchRequest searchRequest)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace eaddress_sdk_csharp.service
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        PaginatorLotNotifications paginatorLotNotifications = JsonConvert.DeserializeObject<PaginatorLotNotifications>(content);
+                        ApiPaginatorLotNotifications paginatorLotNotifications = JsonConvert.DeserializeObject<ApiPaginatorLotNotifications>(content);
 
                         return paginatorLotNotifications;
                     }
@@ -80,7 +80,7 @@ namespace eaddress_sdk_csharp.service
             return null;
         }
 
-        public async Task<NotificationResponse> GetOne(string id, string lotId)
+        public async Task<NotificationsResponse> GetOne(string id, string lotId)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace eaddress_sdk_csharp.service
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        NotificationResponse notificationResponse = JsonConvert.DeserializeObject<NotificationResponse>(content);
+                        NotificationsResponse notificationResponse = JsonConvert.DeserializeObject<NotificationsResponse>(content);
 
                         return notificationResponse;
                     }
