@@ -20,6 +20,7 @@ namespace eaddress_sdk_csharp.dto
         public string errorReason { get; set; }
         public bool withAttachments { get; set; }
         public long createdAt { get; set; }
+        public string link { get; set; }
 
         public NotificationsResponse()
         {
