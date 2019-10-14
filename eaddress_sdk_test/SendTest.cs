@@ -32,9 +32,9 @@ namespace eaddress_sdk_test
             //oMessage.rep = "46256479,70273865";
 
             oMessage.docType = Constants.TYPE_DOC_DNI;
-            oMessage.doc = "11111111";
+            oMessage.doc = "46256479";
 
-            oMessage.subject = "mensaje de prueba individual csharp disolver";
+            oMessage.subject = "mensaje de prueba individual csharp JJ";
             oMessage.message = "<p>Hola <b>Mundo</b></p>";
             oMessage.tag = "tag";
 
@@ -54,7 +54,7 @@ namespace eaddress_sdk_test
             FileStream fileCSV = new FileStream(@"..\..\resources\massive.csv", FileMode.Open, FileAccess.Read);
 
             Message oMessage = new Message();
-            oMessage.subject = "88 mensaje de prueba masiva para [[nombres]]";
+            oMessage.subject = "100 mensaje de prueba masiva para [[nombres]]";
             oMessage.message = "<p></p>" +
                                "<p>[[nombres]]</p>" +
                                "<p>[[numero_orden]]</p>";

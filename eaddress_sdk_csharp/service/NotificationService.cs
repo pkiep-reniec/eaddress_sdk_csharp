@@ -131,7 +131,7 @@ namespace eaddress_sdk_csharp.service
                     HttpClient myHttpClient = new HttpClient();
                     myHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AUTHORIZATION_BEARER, token);
 
-                    HttpResponseMessage response = await myHttpClient.GetAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/notification", id, "/", lotId, "/", acuse));
+                    HttpResponseMessage response = await myHttpClient.GetAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/notification/", id, "/", lotId, "/", acuse));
 
                     if (response.IsSuccessStatusCode)
                     {

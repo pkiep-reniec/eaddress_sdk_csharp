@@ -138,7 +138,7 @@ namespace eaddress_sdk_csharp.service
                     HttpClient myHttpClient = new HttpClient();
                     myHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AUTHORIZATION_BEARER, token);
 
-                    HttpResponseMessage response = await myHttpClient.GetAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/lot", lotId, "/metadata"));
+                    HttpResponseMessage response = await myHttpClient.GetAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/lot/", lotId, "/metadata"));
 
                     if (response.IsSuccessStatusCode)
                     {
