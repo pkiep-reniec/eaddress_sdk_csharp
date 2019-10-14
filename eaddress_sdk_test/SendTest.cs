@@ -34,7 +34,7 @@ namespace eaddress_sdk_test
             oMessage.docType = Constants.TYPE_DOC_DNI;
             oMessage.doc = "46256479";
 
-            oMessage.subject = "mensaje de prueba individual csharp JJ";
+            oMessage.subject = "mensaje de prueba individual csharp change to mtc";
             oMessage.message = "<p>Hola <b>Mundo</b></p>";
             oMessage.tag = "tag";
 

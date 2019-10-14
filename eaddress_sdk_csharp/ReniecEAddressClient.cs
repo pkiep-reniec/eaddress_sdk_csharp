@@ -50,6 +50,7 @@ namespace eaddress_sdk_csharp
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
                 throw e;
             }
 
@@ -103,13 +104,16 @@ namespace eaddress_sdk_csharp
                 using (StreamReader file = File.OpenText(@configFile))
                 {
                     JsonSerializer jsonConfig = new JsonSerializer();
-                    this.config = (Config)jsonConfig.Deserialize(file, typeof(Config));
+                    this.config = (Config) jsonConfig.Deserialize(file, typeof(Config));
                 }
 
-                using (StreamReader file = File.OpenText(@configAga))
+                if (configAga != null)
                 {
-                    JsonSerializer jsonConfig = new JsonSerializer();
-                    this.configAga = (ConfigAga)jsonConfig.Deserialize(file, typeof(ConfigAga));
+                    using (StreamReader file = File.OpenText(@configAga))
+                    {
+                        JsonSerializer jsonConfig = new JsonSerializer();
+                        this.configAga = (ConfigAga) jsonConfig.Deserialize(file, typeof(ConfigAga));
+                    }
                 }
                 
                 this.sendService = SendService.getInstance(this.config, this.configAga, path7Zdll);
