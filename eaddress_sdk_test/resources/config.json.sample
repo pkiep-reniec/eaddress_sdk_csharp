@@ -2,7 +2,7 @@
   "client_id": "",
   "client_secret": "",
   "security_uri":"",
-  "eaddress_service_uri": "",
+  "eaddress_uri": "",
   "doc_type": "",
   "doc": "",
   "name": "",

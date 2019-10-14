@@ -15,7 +15,7 @@ namespace eaddress_sdk_csharp.dto
         public String clientSecret { get; set; }
         [JsonProperty("security_uri")]
         public String securityUri { get; set; }
-        [JsonProperty("eaddress_service_uri")]
+        [JsonProperty("eaddress_uri")]
         public String eaddressServiceUri { get; set; }
         [JsonProperty("doc_type")]
         public String docType { get; set; }

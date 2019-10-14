@@ -70,15 +70,9 @@ namespace eaddress_sdk_test
 
         public void Before()
         {
-            ConfigAga oConfigAga = new ConfigAga();
-            oConfigAga.agaUri = "http://172.24.4.230:8080/refirma-aga/rest/service/sign-file";
-            oConfigAga.timestamp = "true";
-            oConfigAga.certificateId = "certdm";
-            oConfigAga.secretPassword = "NH7PERU$$$";
-
             string path7Z = @"D:\temp\library";
 
-            reniecEAddressClient = new ReniecEAddressClient(@"..\..\resources\config.json", oConfigAga, path7Z);
+            reniecEAddressClient = new ReniecEAddressClient(@"..\..\resources\config.json", @"..\..\resources\configAga.json", path7Z);
         }
     }
 }

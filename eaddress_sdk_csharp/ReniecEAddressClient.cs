@@ -17,9 +17,9 @@ namespace eaddress_sdk_csharp
         private LotService lotService;
         private NotificationService notificationService;
 
-        public ReniecEAddressClient(string configFile, ConfigAga oConfigAga, String path7Zdll)
+        public ReniecEAddressClient(string configFile, string configAga, String path7Zdll)
         {
-            this.setConfig(configFile, oConfigAga, path7Zdll);
+            this.setConfig(configFile, configAga, path7Zdll);
         }
 
         public ReniecEAddressClient(string configFile)
@@ -96,7 +96,7 @@ namespace eaddress_sdk_csharp
             return this.notificationService.DownloadAcuse(id, lotId, acuse);
         }
 
-        private void setConfig(string configFile, ConfigAga oConfigAga, String path7Zdll)
+        private void setConfig(string configFile, string configAga, String path7Zdll)
         {
             try
             {
@@ -106,7 +106,12 @@ namespace eaddress_sdk_csharp
                     this.config = (Config)jsonConfig.Deserialize(file, typeof(Config));
                 }
 
-                this.configAga = oConfigAga;
+                using (StreamReader file = File.OpenText(@configAga))
+                {
+                    JsonSerializer jsonConfig = new JsonSerializer();
+                    this.configAga = (ConfigAga)jsonConfig.Deserialize(file, typeof(ConfigAga));
+                }
+                
                 this.sendService = SendService.getInstance(this.config, this.configAga, path7Zdll);
                 this.lotService = LotService.getInstance(this.config);
                 this.notificationService = NotificationService.getInstance(this.config);

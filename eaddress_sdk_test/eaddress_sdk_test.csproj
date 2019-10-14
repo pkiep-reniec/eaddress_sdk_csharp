@@ -60,6 +60,8 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="packages.config" />
+    <None Include="resources\configAga.json.sample" />
+    <None Include="resources\configAga.json" />
     <None Include="resources\config.json" />
     <None Include="resources\config.json.sample" />
     <None Include="resources\massive.csv" />
