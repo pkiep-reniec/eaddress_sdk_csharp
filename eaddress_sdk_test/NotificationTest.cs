@@ -23,22 +23,25 @@ namespace eaddress_sdk_test
         {
             Before();
 
-            SearchRequest searchRequest = new SearchRequest
-            {
-                page = 1,   
-                count = 5,
-                name = "",
-            };
+            SearchRequest searchRequest = new SearchRequest();
+            //searchRequest.page=1;
+            //searchRequest.count=5;
+            //searchRequest.doc="46256479";
+            //searchRequest.name="alexander";
+            //searchRequest.subject="prueba";
+            //searchRequest.dateBegin=1580515200L;
+            //searchRequest.dateEnd=1583020799L;
 
             Task<ApiPaginatorLotNotifications> notifications = reniecEAddressClient.FetchAllNotifications(searchRequest);
             notifications.Wait();
 
-            foreach (NotificationsResponse notification in notifications.Result.notifications)
+            Console.WriteLine(notifications.Result.recordsTotal);
+
+            foreach (NotificationsResponse notification in notifications.Result.data)
             {
                 Console.WriteLine(JsonConvert.SerializeObject(notification));
             }
-
-            Console.WriteLine(notifications.Result.recordsTotal);
+            
             Assert.IsTrue(notifications.Result.recordsTotal > 0);
         }
 
@@ -88,8 +91,8 @@ namespace eaddress_sdk_test
             string configFile = @"..\..\resources\config.json";
             reniecEAddressClient = new ReniecEAddressClient(configFile);
 
-            this.notificationId = "5d8d2a39c89b471284d34e36";
-            this.lotId = "5d8d2a36c89b4711655603e5";
+            this.notificationId = "5e5e79a4c89b4704dca0fd90";
+            this.lotId = "5e5e79a0c89b470437b5ad21";
         }
     }
 }

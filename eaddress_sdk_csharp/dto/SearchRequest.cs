@@ -20,7 +20,6 @@ namespace eaddress_sdk_csharp.dto
         {
             this.page = 1;
             this.count = 20;
-
         }
 
     }

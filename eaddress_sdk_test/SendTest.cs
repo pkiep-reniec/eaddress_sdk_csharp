@@ -26,15 +26,12 @@ namespace eaddress_sdk_test
             attachments.Add(new Attachment("Archivo demo 3", "https://www.gob.pe/859-plataforma-de-autenticacion-id-peru"));
 
             Message oMessage = new Message();
-
             //oMessage.docType = Constants.TYPE_DOC_RUC;
             //oMessage.doc = "20100055237";
-            //oMessage.rep = "46256479,70273865";
-
             oMessage.docType = Constants.TYPE_DOC_DNI;
             oMessage.doc = "46256479";
 
-            oMessage.subject = "mensaje de prueba individual csharp change to mtc";
+            oMessage.subject = "mensaje de prueba individual csharp";
             oMessage.message = "<p>Hola <b>Mundo</b></p>";
             oMessage.tag = "tag";
 
@@ -51,10 +48,10 @@ namespace eaddress_sdk_test
         {
             Before();
 
-            FileStream fileCSV = new FileStream(@"..\..\resources\massive.csv", FileMode.Open, FileAccess.Read);
+            FileStream fileCSV = new FileStream(@"..\..\resources\massive_pn.csv", FileMode.Open, FileAccess.Read);
 
             Message oMessage = new Message();
-            oMessage.subject = "100 mensaje de prueba masiva para [[nombres]]";
+            oMessage.subject = "mensaje de prueba masiva para [[nombres]]";
             oMessage.message = "<p></p>" +
                                "<p>[[nombres]]</p>" +
                                "<p>[[numero_orden]]</p>";

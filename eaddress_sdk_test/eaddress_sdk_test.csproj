@@ -64,7 +64,8 @@
     <None Include="resources\configAga.json" />
     <None Include="resources\config.json" />
     <None Include="resources\config.json.sample" />
-    <None Include="resources\massive.csv" />
+    <None Include="resources\massive_pn.csv" />
+    <None Include="resources\massive_pj.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eaddress_sdk_csharp\eaddress_sdk_csharp.csproj">

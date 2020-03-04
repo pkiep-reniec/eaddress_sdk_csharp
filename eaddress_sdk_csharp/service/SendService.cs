@@ -171,7 +171,7 @@ namespace eaddress_sdk_csharp.service
 
             if (single)
             {
-                String hashMessage = String.Concat(oPerson.name, oApp.name, message.subject, date, message.message);
+                String hashMessage = String.Concat(message.subject, message.message);
                 var crypt = new System.Security.Cryptography.SHA256Managed();
                 var hash = new System.Text.StringBuilder();
                 byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(hashMessage));
