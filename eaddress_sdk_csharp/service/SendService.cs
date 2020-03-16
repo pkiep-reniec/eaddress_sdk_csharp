@@ -185,7 +185,7 @@ namespace eaddress_sdk_csharp.service
             }
             else
             {
-                Metadata metadataChecksum = getChecksum(fileCsv);
+                Metadata metadataChecksum = getChecksum(message, fileCsv);
 
                 if (metadataChecksum == null)
                 {
@@ -199,14 +199,14 @@ namespace eaddress_sdk_csharp.service
             return metadata;
         }
 
-        private Metadata getChecksum(FileStream fileCsv)
+        private Metadata getChecksum(Message message, FileStream fileCsv)
         {
             Metadata metadata = new Metadata();
 
             try
             {
                 String data = "";
-                String content = "";
+                String content = String.Concat(message.subject, message.message);
                 int count = -1;
 
                 StreamReader sr = new StreamReader(fileCsv);
@@ -318,7 +318,7 @@ namespace eaddress_sdk_csharp.service
                     form.Add(new StreamContent(fileSign), "fileSign", fileSign.Name);
 
                     HttpResponseMessage response = await httpClient.PostAsync(string.Concat(this.config.eaddressServiceUri, "/api/v1.0/send/single"), form);
-                    
+
                     httpClient.Dispose();
                     String content = await response.Content.ReadAsStringAsync();
                     ApiResponse tokenResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
